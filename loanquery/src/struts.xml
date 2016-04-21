@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"  
+  name="myRequestParser" class="com.mcjs.util.RequestParseWrapper"  
+  scope="default" optional="true" />  
+<constant name="struts.multipart.parser" value="myRequestParser" />
+<constant name="struts.i18n.encoding" value="utf-8"></constant>
+<constant name="struts.multipart.maxSize" value="1000000000" />
+<package name="default" namespace="/"  extends="struts-default,json-default">
+	<action name="findUser" class="com.mcjs.action.UserAction" method="findUsers">
+		<result name="findAll_success">jsp/systemset/userlist.jsp</result>
+	</action>
+	<action name="getUser" class="com.mcjs.action.UserAction" method="getUsers">
+		<result name="success">jsp/main/main.jsp</result>
+	</action>
+	<action name="addUser" class="com.mcjs.action.UserAction" method="addUser">
+		<result name="success" type="redirectAction">findUser</result>
+	</action>
+	<action name="updateUser" class="com.mcjs.action.UserAction" method="updateUser">
+		<result name="success" type="redirectAction">findUser</result>
+	</action>
+	<action name="deleteUser" class="com.mcjs.action.UserAction" method="deleteUser">
+		<result type="json"><param name="root">dataMap</param></result>
+		<!--<result name="success" type="redirectAction">findUser</result>-->
+	</action>
+	<action name="linkUser" class="com.mcjs.action.LinkAction" method="addUsers">
+		<result name="success">jsp/systemset/adduser.jsp</result>
+	</action>
+	<action name="linkUpdateUser" class="com.mcjs.action.LinkAction" method="linkUpdateUser">
+		<result name="success">jsp/systemset/updateuser.jsp</result>
+	</action>
+	<action name="updateUsers" class="com.mcjs.action.UserAction" method="updateUsers">
+		<result name="success" type="redirectAction">findUser</result>
+	</action>
+	<action name="getTop" class="com.mcjs.action.MainAction" method="getTop">
+		<result name="success">jsp/main/top.jsp</result>
+	</action>
+	<action name="getFooter" class="com.mcjs.action.MainAction" method="getFooter">
+		<result name="success">jsp/main/footer.jsp</result>
+	</action>
+	<action name="getLeft" class="com.mcjs.action.MainAction" method="getLeft">
+		<result name="success">jsp/main/left.jsp</result>
+	</action>
+	<action name="addRole" class="com.mcjs.action.RoleAction" method="addRoles">
+		<result name="success" type="redirectAction">findRole</result>
+	</action>
+	<action name="updaterole" class="com.mcjs.action.RoleAction" method="updaterole">
+		<result name="success" type="redirectAction">findRole</result>
+	</action>
+	<action name="linkupdaterole" class="com.mcjs.action.LinkAction" method="updateRole">
+		<result name="success">jsp/systemset/updaterole.jsp</result>
+	</action>
+	<action name="deleteRole" class="com.mcjs.action.RoleAction" method="deleteRole">
+		<result name="success" type="redirectAction">findRole</result>
+	</action>
+	<action name="findRole" class="com.mcjs.action.RoleAction" method="findRoles">
+		<result name="findAll_success">jsp/systemset/rolelist.jsp</result>
+	</action>
+	<action name="linkRole" class="com.mcjs.action.LinkAction" method="addRole">
+		<result name="success">jsp/systemset/addrole.jsp</result>
+	</action>
+	<action name="Userslogin" class="com.mcjs.action.UserAction" method="loginUser">
+		<result name="success">jsp/main/main.jsp</result>
+		<result name="error" type="redirect">error.jsp</result>
+	</action>
+	<action name="LinkData" class="com.mcjs.action.LinkAction" method="importData">
+		<result name="success">jsp/dataimport/importdata.jsp</result>
+	</action>
+	<action name="linkOrg" class="com.mcjs.action.LinkAction" method="addOrg">
+		<result name="success">jsp/orginfo/addorginfo.jsp</result>
+	</action>
+	<action name="findOrgInfo" class="com.mcjs.action.OrgInfoAction" method="findOrgInfo">
+		<result name="findAll_success">jsp/orginfo/orginfolist.jsp</result>
+	</action>
+	<action name="addOrgInfo" class="com.mcjs.action.OrgInfoAction" method="addOrgInfo">
+		<result name="success" type="redirectAction">findOrgInfo</result>
+	</action>
+	<action name="UpdateOrgInfo" class="com.mcjs.action.OrgInfoAction" method="UpdateOrgInfo">
+		<result name="success" type="redirectAction">findOrgInfo</result>
+	</action>
+	<action name="linkUpdateOrginfo" class="com.mcjs.action.LinkAction" method="updateOrg">
+		<result name="success">jsp/orginfo/updateorginfo.jsp</result>
+	</action>
+	<action name="updateStatusOrg" class="com.mcjs.action.OrgInfoAction" method="updateStatusOrg">
+		<result name="success" type="redirectAction">findOrgInfo</result>
+	</action>
+	<action name="deleteOrginfo" class="com.mcjs.action.OrgInfoAction" method="deleteOrgInfo">
+		<!--<result name="success" type="redirectAction">findOrgInfo</result>  -->
+		<result type="json"><param name="root">dataMap</param></result>
+	</action>
+	<action name="linkLoan" class="com.mcjs.action.LinkAction" method="addLoan">
+		<result name="success">jsp/loan/addloan.jsp</result>
+	</action>
+	<action name="findLoan" class="com.mcjs.action.LoanLeaderAction" method="findLoanLeader">
+		<result name="findAll_success">jsp/loan/loanlist.jsp</result>
+	</action>
+	<action name="addLoan" class="com.mcjs.action.LoanLeaderAction" method="addLoanLeader">
+		<result name="success" type="redirectAction">findLoan</result>
+	</action>
+	<action name="findData" class="com.mcjs.action.DataImportAction" method="findData">
+		<result name="findAll_success">jsp/dataimport/datalist.jsp</result>
+	</action>
+	<action name="linkData" class="com.mcjs.action.LinkAction" method="addData">
+		<result name="success">jsp/dataimport/importdata.jsp</result>
+	</action>
+	<action name="importData" class="com.mcjs.action.UpLoadAction" method="importData">
+		<result name="success" type="redirectAction">findData</result>
+	</action>
+	<action name="deleteImport" class="com.mcjs.action.DataImportAction" method="deleteImport">
+		<!--<result name="success" type="redirectAction">findData</result>-->
+		<result type="json"><param name="root">dataMap</param></result>
+	</action>
+	<action name="linkLoanmember" class="com.mcjs.action.LinkAction" method="addLoanmember">
+		<result name="success">jsp/loan/addmember.jsp</result>
+	</action>
+	<action name="findLoanmember" class="com.mcjs.action.LoanMemberAction" method="findLoanMember">
+		<result name="findAll_success">jsp/loan/loanmemberlist.jsp</result>
+	</action>
+	<action name="addLoanmember" class="com.mcjs.action.LoanMemberAction" method="addLoanMember">
+		<result name="success" type="redirectAction">findLoanmember</result>
+	</action>
+	<action name="findStatusFund" class="com.mcjs.action.StatusFundAction" method="findStatusFund">
+		<result name="findAll_success">jsp/loandata/StatusFund.jsp</result>
+	</action>
+	<action name="findPositionGather" class="com.mcjs.action.PositionGatherAction" method="findPositionGather">
+		<result name="findAll_success">jsp/loandata/PositionGather.jsp</result>
+	</action>
+	<action name="findBusinessGather" class="com.mcjs.action.BusinessGatherAction" method="findBusinessGather">
+		<result name="findAll_success">jsp/loandata/BusinessGather.jsp</result>
+		<result name="false" type="redirect">jsp/login.jsp</result>
+	</action>
+	<action name="findPositionSele" class="com.mcjs.action.PositionSeleAction" method="findPositionSele">
+		<result name="findAll_success">jsp/loandata/PositionSele.jsp</result>
+	</action>
+	<action name="findBusinessSele" class="com.mcjs.action.BusinessSeleAction" method="findBusinessSele">
+		<result name="findAll_success">jsp/loandata/BusinessSele.jsp</result>
+	</action>
+	<action name="findEntrustSele" class="com.mcjs.action.EntrustSeleAction" method="findEntrustSele">
+		<result name="findAll_success">jsp/loandata/EntrustSele.jsp</result>
+	</action>
+	<action name="findFundStreamSele" class="com.mcjs.action.FundStreamSeleAction" method="findFundStreamSele">
+		<result name="findAll_success">jsp/loandata/FundStreamSele.jsp</result>
+	</action>
+	<action name="findCustomFund" class="com.mcjs.action.CustomFundAction" method="findCustomFund">
+		<result name="findAll_success">jsp/loandata/CustomFund.jsp</result>
+	</action>
+	<action name="searchStausFund" class="com.mcjs.action.StatusFundAction" method="searchStausFund">
+		<result name="findAll_success">jsp/loandata/StatusFund.jsp</result>
+	</action>
+	<action name="searchPositionGather" class="com.mcjs.action.PositionGatherAction" method="searchPositionGather">
+		<result name="findAll_success">jsp/loandata/PositionGather.jsp</result>
+	</action>
+	<action name="searchBusinessGather" class="com.mcjs.action.BusinessGatherAction" method="searchBusinessGather">
+		<result name="findAll_success">jsp/loandata/BusinessGather.jsp</result>
+		<!--<result type="json"><param name="root">dataMap</param></result>-->
+	</action>
+	<action name="searchPositionSele" class="com.mcjs.action.PositionSeleAction" method="searchPositionSele">
+		<result name="findAll_success">jsp/loandata/PositionSele.jsp</result>
+	</action>
+	<action name="searchCustomFund" class="com.mcjs.action.CustomFundAction" method="searchCustomFund">
+		<result name="findAll_success">jsp/loandata/CustomFund.jsp</result>
+	</action>
+	<action name="searchFundStream" class="com.mcjs.action.FundStreamSeleAction" method="searchFundStream">
+		<result name="findAll_success">jsp/loandata/FundStreamSele.jsp</result>
+	</action>
+	<action name="searchEntrustSele" class="com.mcjs.action.EntrustSeleAction" method="searchEntrustSele">
+		<result name="findAll_success">jsp/loandata/EntrustSele.jsp</result>
+	</action>
+	<action name="searchBusinessSele" class="com.mcjs.action.BusinessSeleAction" method="searchBusinessSele">
+		<result name="findAll_success">jsp/loandata/BusinessSele.jsp</result>
+	</action>
+	<action name="searchOrg" class="com.mcjs.action.OrgInfoAction" method="searchOrg">
+		<result name="findAll_success">jsp/orginfo/orginfolist.jsp</result>
+	</action>
+	<action name="searchLoan" class="com.mcjs.action.LoanLeaderAction" method="searchLoan">
+		<result name="findAll_success">jsp/loan/loanlist.jsp</result>
+	</action>
+	<action name="searchLoanmerber" class="com.mcjs.action.LoanMemberAction" method="searchLoanmerber">
+		<result name="findAll_success">jsp/loan/loanmemberlist.jsp</result>
+	</action>
+	<action name="findPurview" class="com.mcjs.action.PurviewAction" method="findPurview">
+		<result name="findAll_success">jsp/systemset/purviewlist.jsp</result>
+	</action>
+	<action name="linkPurview" class="com.mcjs.action.LinkAction" method="addPurview">
+		<result name="success">jsp/systemset/addpurview.jsp</result>
+	</action>
+	<action name="addPurview" class="com.mcjs.action.PurviewAction" method="addPurview">
+		<result name="success" type="redirectAction">findPurview</result>
+	</action>
+	<action name="getPurview" class="com.mcjs.action.PurviewAction" method="getAuthorize">
+		<result name="success">jsp/systemset/roleauthorize.jsp</result>
+	</action>
+	<action name="addRoleAuthorize" class="com.mcjs.action.PurviewAction" method="addRoleAuthorize">
+		<result name="success">jsp/systemset/rolelist.jsp</result>
+	</action>
+	<action name="linkout" class="com.mcjs.action.LinkAction" method="out">
+		<result name="success">jsp/login.jsp</result>
+	</action>
+	<action name="linkUpdateLoan" class="com.mcjs.action.LinkAction" method="linkUpdateLoan">
+		<result name="success">jsp/loan/updateloan.jsp</result>
+	</action>
+	<action name="updateLoan" class="com.mcjs.action.LoanLeaderAction" method="updateLoan">
+		<result name="success" type="redirectAction">findLoan</result>
+		<!--<result type="json"><param name="root">dataMap</param></result> -->
+	</action>
+	<action name="deleteLoan" class="com.mcjs.action.LoanLeaderAction" method="deleteLoan">
+		<!--<result name="success" type="redirectAction">findLoan</result>-->
+		<result type="json"><param name="root">dataMap</param></result>
+	</action>
+	<action name="updateLoanStatus" class="com.mcjs.action.LoanLeaderAction" method="updateLoanStatus">
+		<result name="success" type="redirectAction">findLoan</result>
+	</action>
+	<action name="deleteLoanMember" class="com.mcjs.action.LoanMemberAction" method="deleteLoanMember">
+		<!--<result name="success" type="redirectAction">findLoanmember</result>-->
+		<result type="json"><param name="root">dataMap</param></result>
+	</action>
+	<action name="linkUpdateLoanMember" class="com.mcjs.action.LinkAction" method="linkUpdateLoanMember">
+		<result name="success">/jsp/loan/updatemember.jsp</result>
+	</action>
+	<action name="updateLoanmember" class="com.mcjs.action.LoanMemberAction" method="updateLoanmember">
+		<result name="success" type="redirectAction">findLoanmember</result>
+	</action>
+	<action name="getCheckName" class="com.mcjs.action.UserAction" method="checkName">
+		<result type="json"><param name="root">dataMap</param></result>
+	</action>
+	<action name="getCheckNames" class="com.mcjs.action.UserAction" method="checkNames">
+		<result type="json"><param name="root">dataMap</param></result>
+	</action>
+	<action name="getRoleAuthorize" class="com.mcjs.action.PurviewAction" method="getRoleAuthorizes">
+        <!-- 将返回类型设置为json -->
+        <result type="json"><param name="root">dataMap</param></result>
+    </action>
+    <action name="getLoanLeaders" class="com.mcjs.action.LoanLeaderAction" method="getLoanLeaders">
+    	<result type="json"><param name="root">dataMap</param></result>
+    </action>
+    <action name="getLoanMembers" class="com.mcjs.action.LoanMemberAction" method="getLoanMembers">
+    	<result type="json"><param name="root">dataMap</param></result>
+    </action>
+    <action name="findBusinessGatherPage" class="com.mcjs.action.BusinessGatherAction" method="goPage">
+    	<result name="findAll_success">jsp/loandata/BusinessGather.jsp</result>
+    </action>
+    <action name="findBusinessSelePage" class="com.mcjs.action.BusinessSeleAction" method="goPage">
+    	<result name="findAll_success">jsp/loandata/BusinessSele.jsp</result>
+    </action>
+    <action name="findCustomFundPage" class="com.mcjs.action.CustomFundAction" method="goPage">
+    	<result name="findAll_success">jsp/loandata/CustomFund.jsp</result>
+    </action>
+    <action name="findEntrustSelePage" class="com.mcjs.action.EntrustSeleAction" method="goPage">
+    	<result name="findAll_success">jsp/loandata/EntrustSele.jsp</result>
+    </action>
+    <action name="findFundStreamSelePage" class="com.mcjs.action.FundStreamSeleAction" method="goPage">
+    	<result name="findAll_success">jsp/loandata/FundStreamSele.jsp</result>
+    </action>
+    <action name="findPositionGatherPage" class="com.mcjs.action.PositionGatherAction" method="goPage">
+    	<result name="findAll_success">jsp/loandata/PositionGather.jsp</result>
+    </action>
+    <action name="findPositionSelePage" class="com.mcjs.action.PositionSeleAction" method="goPage">
+    	<result name="findAll_success">jsp/loandata/PositionSele.jsp</result>
+    </action>
+    <action name="findStatusFundPage" class="com.mcjs.action.StatusFundAction" method="goPage">
+    	<result name="findAll_success">jsp/loandata/StatusFund.jsp</result>
+    </action>
+    <action name="findLoanmemberPage" class="com.mcjs.action.LoanMemberAction" method="goPage">
+    	<result name="findAll_success">jsp/loan/loanmemberlist.jsp</result>
+    </action>
+    <action name="findOrgInfoPage" class="com.mcjs.action.OrgInfoAction" method="goPage">
+    	<result name="findAll_success">jsp/orginfo/orginfolist.jsp</result>
+    </action>
+    <action name="findLoanPage" class="com.mcjs.action.LoanLeaderAction" method="goPage">
+    	<result name="findAll_success">jsp/loan/loanlist.jsp</result>
+    </action>
+    <action name="getCheckAccount" class="com.mcjs.action.LoanMemberAction" method="getCheckAccount">
+    	<result type="json"><param name="root">dataMap</param></result>
+    </action>
+    <action name="getCheckAccounts" class="com.mcjs.action.LoanMemberAction" method="getCheckAccounts">
+    	<result type="json"><param name="root">dataMap</param></result>
+    </action>
+    <action name="importBusGather" class="com.mcjs.action.BusinessGatherAction" method="importBusGather">
+    	<result type="json"><param name="root">dataMap</param></result>
+    </action>
+    <action name="importBusSele" class="com.mcjs.action.BusinessSeleAction" method="importBusSele">
+    	<result name="success">jsp/loandata/BusinessSele.jsp</result>
+    </action>
+    <action name="importCustomFund" class="com.mcjs.action.CustomFundAction" method="importCustomFund">
+    	<result name="success">jsp/loandata/CustomFund.jsp</result>
+    </action>
+    <action name="importEntrustSele" class="com.mcjs.action.EntrustSeleAction" method="importEntrustSele">
+    	<result name="success">jsp/loandata/EntrustSele.jsp</result>
+    </action>
+    <action name="importFundStreamSele" class="com.mcjs.action.FundStreamSeleAction" method="importFundStreamSele">
+    	<result name="success">jsp/loandata/FundStreamSele.jsp</result>
+    </action>
+    <action name="importPostionGather" class="com.mcjs.action.PositionGatherAction" method="importPostionGather">
+    	<result name="success">jsp/loandata/PositionGather.jsp</result>
+    </action>
+    <action name="importPositionSele" class="com.mcjs.action.PositionSeleAction" method="importPositionSele">
+    	<result name="success">jsp/loandata/PositionSele.jsp</result>
+    </action>
+    <action name="importStatusFund" class="com.mcjs.action.StatusFundAction" method="importStatusFund">
+    	<result name="success">jsp/loandata/StatusFund.jsp</result>
+    </action>
+    <action name="selectBusinessGather" class="com.mcjs.action.BusinessGatherAction" method="selectBusinessGather">
+    	<result name="success" type="redirect">jsp/loandata/BusinessGather.jsp</result>
+    </action>
+    <action name="deletePurview" class="com.mcjs.action.PurviewAction" method="deletePurview">
+    	<result name="success" type="redirectAction">findPurview</result>
+    </action>
+    <action name="AutocompleteOrg" class="com.mcjs.action.OrgInfoAction" method="AutocompleteOrg">
+    	<result type="json"><param name="root">dataMap</param></result>
+    </action>
+    <action name="AutocompleteLoan" class="com.mcjs.action.LoanLeaderAction" method="AutocompleteLoan">
+    	<result type="json"><param name="root">dataMap</param></result>
+    </action>
+    <action name="Upload" class="com.mcjs.action.UpLoadAction" method="Upload">
+    	 <interceptor-ref name="fileUpload">
+            <param name="maximumSize">1000000000</param>    
+         </interceptor-ref>   
+         <interceptor-ref name="defaultStack"/>      
+         <param name="savePath">/upload</param>
+    	<result type="json"><param name="root">dataMap</param></result>
+    </action>
+</package>
+</struts>
